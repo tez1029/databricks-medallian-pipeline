@@ -54,9 +54,9 @@ else:
 
 # COMMAND ----------
 
-if not target_exists or not count:
+if not target_exists or count == 0:
     # -----------------------------
-    # FIRST RUN - FULL LOAD
+    # FIRST RUN OR EMPTY TABLE - FULL LOAD
     # -----------------------------
     print("Performing FULL LOAD.")
 
@@ -67,7 +67,7 @@ if not target_exists or not count:
         .mode("overwrite") \
         .saveAsTable(target_table)
 else:
-    print("Target table exists. Performing INCREMENTAL LOAD.")
+    print("Target table exists with records. Performing INCREMENTAL LOAD.")
 
     df = spark.table(source_table)
 
